@@ -141,6 +141,15 @@ PCCONTROL now includes an Electron-based native desktop application for the cont
 
 ---
 
+## ✨ Features - Hardware HID Support
+
+PCCONTROL now supports **Hardware HID Integration**.
+
+- **Serial Communication:** The agent is now equipped with the `serialport` library to send control commands directly to external microcontroller devices (e.g., Arduino, Raspberry Pi Pico) acting as physical USB HID devices.
+- **Hybrid Input:** The system supports a hybrid approach, allowing you to use both software-level OS API control and hardware-level emulation for maximum flexibility and compatibility.
+
+---
+
 ## 🛣️ Future Development Roadmap
 
 - [x] **Advanced Input:** Support for touch gestures on mobile (swipes, pinch-to-zoom).
@@ -148,11 +157,13 @@ PCCONTROL now includes an Electron-based native desktop application for the cont
 - [x] **Full HID Mapping:** Implement comprehensive support for keyboard shortcuts and advanced mouse buttons.
 - [x] **Multi-Agent Support:** Allow connecting multiple PCs and switching between them in the UI.
 - [x] **Native App Wrappers:** Create Electron/Tauri versions of the client for a better experience.
-- [ ] **Hardware HID:** Experiment with Node-HID for true USB emulation.
+- [x] **Hardware HID:** Experiment with Node-HID for true USB emulation.
 - [ ] **Authentication:** OAuth2/Auth0 integration for secure user management.
 - [ ] **Performance:** WebRTC for low-latency streaming.
 - [ ] **Security:** Two-Factor Authentication (2FA) for sensitive actions.
 - [ ] **Monitoring:** Add live dashboard for monitoring agent status (CPU/RAM).
+- [ ] **Voice Control:** Integrate speech-to-text for voice-activated commands.
+- [ ] **Macro Engine:** Allow recording and playback of complex macro sequences.
 
 ---
 
