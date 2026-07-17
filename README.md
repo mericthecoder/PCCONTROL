@@ -191,7 +191,6 @@ PCCONTROL now supports **WebRTC-based Low-Latency Streaming**.
 - [x] **Authentication:** OAuth2/Auth0 integration for secure user management.
 - [x] **Performance:** WebRTC for low-latency streaming.
 - [ ] **Monitoring:** Add live dashboard for monitoring agent status (CPU/RAM).
-- [ ] **Voice Control:** Integrate speech-to-text for voice-activated commands.
 - [ ] **Macro Engine:** Allow recording and playback of complex macro sequences.
 
 ---
