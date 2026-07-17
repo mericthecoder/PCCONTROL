@@ -26,7 +26,11 @@
     <button onclick="sendAction({ type: 'key', value: '^c' })">Ctrl+C</button>
     <button onclick="sendAction({ type: 'key', value: '^v' })">Ctrl+V</button>
     <button onclick="sendAction({ type: 'key', value: '{ESC}' })">Esc</button>
-    
+
+    <h3>Macro Engine</h3>
+    <button id="recBtn" onclick="toggleRecord()">Record Macro</button>
+    <button id="playBtn" onclick="playMacro()" disabled>Play Macro</button>
+
     <h3>Mouse</h3>
     <div id="touchpad" style="width: 100vw; height: 50vh; background-color: #ddd; margin-top: 10px;">
       Touchpad (Move Mouse Here)
@@ -34,9 +38,32 @@
   </div>
 
   <script>
-    const socket = io('http://localhost:3000'); // Update with actual server URL
+    const socket = io('http://localhost:3000');
     const touchpad = document.getElementById('touchpad');
     const agentSelect = document.getElementById('agentSelect');
+    const recBtn = document.getElementById('recBtn');
+    const playBtn = document.getElementById('playBtn');
+
+    let isRecording = false;
+    let currentMacro = [];
+
+    function toggleRecord() {
+      isRecording = !isRecording;
+      if (isRecording) {
+        currentMacro = [];
+        recBtn.textContent = 'Stop Recording';
+        playBtn.disabled = true;
+      } else {
+        recBtn.textContent = 'Record Macro';
+        playBtn.disabled = currentMacro.length === 0;
+      }
+    }
+
+    function playMacro() {
+      if (currentMacro.length > 0) {
+        sendAction({ type: 'macro', sequence: currentMacro });
+      }
+    }
 
     socket.on('agent_stats', (data) => {
         if(agentSelect.value === data.agentId) {
@@ -81,8 +108,12 @@
     });
 
     function sendAction(action) {
-      action.targetId = agentSelect.value;
-      socket.emit('action', action);
+      if (isRecording) {
+        currentMacro.push(action);
+      } else {
+        action.targetId = agentSelect.value;
+        socket.emit('action', action);
+      }
     }
   </script>
 </body>

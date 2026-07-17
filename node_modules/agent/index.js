@@ -20,6 +20,22 @@ const socket = io('http://localhost:3000'); // Update with actual server URL lat
 
 let peer;
 
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+async function executeAction(action) {
+  if (serial && serial.isOpen) {
+    serial.write(JSON.stringify(action));
+  }
+  
+  if (action.type === 'key') {
+    const psCommand = `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('${action.value}')"`;
+    exec(psCommand);
+  } else if (action.type === 'mouse') {
+    const psCommand = `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${action.x}, ${action.y})"`;
+    exec(psCommand);
+  }
+}
+
 socket.on('connect', () => {
   console.log('Connected to server');
   socket.emit('identify', { name: 'PC-' + Math.floor(Math.random() * 1000) });
@@ -38,20 +54,14 @@ socket.on('signal', (data) => {
   if (peer) peer.signal(data.signal);
 });
 
-socket.on('execute', (action) => {
+socket.on('execute', async (action) => {
   console.log('Executing action:', action);
   
-  if (serial && serial.isOpen) {
-    serial.write(JSON.stringify(action));
-  }
-  
-  // Software HID fallback
-  if (action.type === 'key') {
-    const psCommand = `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('${action.value}')"`;
-    exec(psCommand);
-  } else if (action.type === 'mouse') {
-    const psCommand = `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${action.x}, ${action.y})"`;
-    exec(psCommand);
+  if (action.type === 'macro') {
+    for (const subAction of action.sequence) {
+      await executeAction(subAction);
+      await delay(200); // Small delay between macro steps
+    }
   } else if (action.type === 'start-stream') {
     // Initiate WebRTC
     peer = new Peer({ initiator: true, trickle: false });
@@ -66,5 +76,7 @@ socket.on('execute', (action) => {
             peer.send(img);
         }
     }, 100);
+  } else {
+    await executeAction(action);
   }
 });
