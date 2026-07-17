@@ -11,6 +11,9 @@
   <input type="password" id="pin" placeholder="Enter PIN">
   <button onclick="authenticate()">Login</button>
   <div id="controls" style="display:none;">
+    <h3>Select Agent</h3>
+    <select id="agentSelect"></select>
+    
     <h3>Actions</h3>
     <button onclick="sendAction({ type: 'key', value: '{ENTER}' })">Enter</button>
     <button onclick="sendAction({ type: 'key', value: '{BACKSPACE}' })">Backspace</button>
@@ -27,11 +30,23 @@
   <script>
     const socket = io('http://localhost:3000'); // Update with actual server URL
     const touchpad = document.getElementById('touchpad');
+    const agentSelect = document.getElementById('agentSelect');
+
+    function updateAgentList(agents) {
+      agentSelect.innerHTML = '';
+      agents.forEach(([id, name]) => {
+        const option = document.createElement('option');
+        option.value = id;
+        option.textContent = name;
+        agentSelect.appendChild(option);
+      });
+    }
+
+    socket.on('agent_list', updateAgentList);
 
     touchpad.addEventListener('touchmove', (e) => {
       e.preventDefault();
       const touch = e.touches[0];
-      // Scale coordinates: assuming phone screen is ~1000px wide
       const x = Math.floor(touch.clientX * 2); 
       const y = Math.floor(touch.clientY * 2);
       sendAction({ type: 'mouse', x: x, y: y });
@@ -45,6 +60,7 @@
     socket.on('auth_result', (data) => {
       if (data.success) {
         document.getElementById('controls').style.display = 'block';
+        updateAgentList(data.agents);
         alert('Authenticated!');
       } else {
         alert('Authentication failed: ' + data.message);
@@ -52,6 +68,7 @@
     });
 
     function sendAction(action) {
+      action.targetId = agentSelect.value;
       socket.emit('action', action);
     }
   </script>

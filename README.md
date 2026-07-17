@@ -120,12 +120,24 @@ PCCONTROL now supports **Extended HID Mapping**, providing a virtual keyboard in
 
 ---
 
+---
+
+## ✨ Features - Multi-Agent Support
+
+PCCONTROL now supports connecting multiple PCs simultaneously to a single instance of the signaling server.
+
+- **Agent Identification:** Each agent automatically registers with a unique name upon connecting.
+- **Dynamic Agent Listing:** The client interface dynamically fetches and displays a list of all currently online agents.
+- **Targeted Control:** Users can select a specific target PC from the dropdown list in the controller UI, ensuring commands are routed only to the intended device.
+
+---
+
 ## 🛣️ Future Development Roadmap
 
 - [x] **Advanced Input:** Support for touch gestures on mobile (swipes, pinch-to-zoom).
 - [x] **Configurable PIN:** Move PIN to a secure environment variable.
 - [x] **Full HID Mapping:** Implement comprehensive support for keyboard shortcuts and advanced mouse buttons.
-- [ ] **Multi-Agent Support:** Allow connecting multiple PCs and switching between them in the UI.
+- [x] **Multi-Agent Support:** Allow connecting multiple PCs and switching between them in the UI.
 - [ ] **Native App Wrappers:** Create Electron/Tauri versions of the client for a better experience.
 - [ ] **Hardware HID:** Experiment with Node-HID for true USB emulation.
 

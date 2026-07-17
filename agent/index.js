@@ -5,6 +5,7 @@ const socket = io('http://localhost:3000'); // Update with actual server URL lat
 
 socket.on('connect', () => {
   console.log('Connected to server');
+  socket.emit('identify', { name: 'PC-' + Math.floor(Math.random() * 1000) });
 });
 
 socket.on('execute', (action) => {
