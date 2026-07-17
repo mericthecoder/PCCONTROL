@@ -1,9 +1,23 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
+const { auth } = require('express-openid-connect');
 
 const app = express();
 const server = http.createServer(app);
+
+// Auth0 Configuration (Placeholder - Configure in environment)
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.AUTH0_SECRET || 'a-very-long-random-string',
+  baseURL: process.env.BASE_URL || 'http://localhost:3000',
+  clientID: process.env.AUTH0_CLIENT_ID,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
+};
+
+// app.use(auth(config)); // Uncomment to enable Auth0 middleware
+
 const io = new Server(server, {
   cors: {
     origin: "*",

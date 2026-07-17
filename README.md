@@ -178,7 +178,7 @@ If you are using an external microcontroller (e.g., Arduino) for hardware HID:
 - [x] **Multi-Agent Support:** Allow connecting multiple PCs and switching between them in the UI.
 - [x] **Native App Wrappers:** Create Electron/Tauri versions of the client for a better experience.
 - [x] **Hardware HID:** Experiment with Node-HID for true USB emulation.
-- [ ] **Authentication:** OAuth2/Auth0 integration for secure user management.
+- [x] **Authentication:** OAuth2/Auth0 integration for secure user management.
 - [ ] **Performance:** WebRTC for low-latency streaming.
 - [ ] **Security:** Two-Factor Authentication (2FA) for sensitive actions.
 - [ ] **Monitoring:** Add live dashboard for monitoring agent status (CPU/RAM).
