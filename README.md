@@ -1,5 +1,6 @@
 # PCCONTROL - Advanced Remote PC Control
 
+## ✅ Project Status: Completed
 PCCONTROL is a powerful, lightweight, and secure solution designed to turn your smartphone or any web-enabled device into a virtual peripheral controller for your Windows 11 PC. By leveraging real-time communication protocols and system-level input simulation, it provides seamless remote control functionality without the need for complex, heavy-duty remote desktop streaming software.
 
 ---
