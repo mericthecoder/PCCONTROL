@@ -109,11 +109,22 @@ To host the Signaling Server publicly:
 
 ---
 
+---
+
+## ✨ Features - Advanced HID Mapping
+
+PCCONTROL now supports **Extended HID Mapping**, providing a virtual keyboard interface for common operations.
+
+- **Standard Key Support:** Added support for essential keys like `Backspace`, `Esc`, `Enter`, and commonly used combinations like `Ctrl+C` and `Ctrl+V`.
+- **Flexible Command System:** The agent uses PowerShell's `SendKeys` which natively supports many key combinations, allowing for easy expansion of supported shortcuts in the future.
+
+---
+
 ## 🛣️ Future Development Roadmap
 
 - [x] **Advanced Input:** Support for touch gestures on mobile (swipes, pinch-to-zoom).
 - [x] **Configurable PIN:** Move PIN to a secure environment variable.
-- [ ] **Full HID Mapping:** Implement comprehensive support for keyboard shortcuts and advanced mouse buttons.
+- [x] **Full HID Mapping:** Implement comprehensive support for keyboard shortcuts and advanced mouse buttons.
 - [ ] **Multi-Agent Support:** Allow connecting multiple PCs and switching between them in the UI.
 - [ ] **Native App Wrappers:** Create Electron/Tauri versions of the client for a better experience.
 - [ ] **Hardware HID:** Experiment with Node-HID for true USB emulation.
