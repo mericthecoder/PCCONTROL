@@ -132,14 +132,27 @@ PCCONTROL now supports connecting multiple PCs simultaneously to a single instan
 
 ---
 
+## ✨ Features - Native Desktop Client
+
+PCCONTROL now includes an Electron-based native desktop application for the controller interface, providing a more integrated experience than a browser-based controller.
+
+- **Desktop Experience:** Run PCCONTROL as a standalone application on your PC, tablet, or laptop.
+- **Cross-Platform:** Built with Electron to work seamlessly across Windows, macOS, and Linux.
+
+---
+
 ## 🛣️ Future Development Roadmap
 
 - [x] **Advanced Input:** Support for touch gestures on mobile (swipes, pinch-to-zoom).
 - [x] **Configurable PIN:** Move PIN to a secure environment variable.
 - [x] **Full HID Mapping:** Implement comprehensive support for keyboard shortcuts and advanced mouse buttons.
 - [x] **Multi-Agent Support:** Allow connecting multiple PCs and switching between them in the UI.
-- [ ] **Native App Wrappers:** Create Electron/Tauri versions of the client for a better experience.
+- [x] **Native App Wrappers:** Create Electron/Tauri versions of the client for a better experience.
 - [ ] **Hardware HID:** Experiment with Node-HID for true USB emulation.
+- [ ] **Authentication:** OAuth2/Auth0 integration for secure user management.
+- [ ] **Performance:** WebRTC for low-latency streaming.
+- [ ] **Security:** Two-Factor Authentication (2FA) for sensitive actions.
+- [ ] **Monitoring:** Add live dashboard for monitoring agent status (CPU/RAM).
 
 ---
 
