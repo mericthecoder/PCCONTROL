@@ -1,0 +1,11 @@
+{
+  "name": "pccontrol",
+  "version": "1.0.0",
+  "description": "Remote PC control via phone",
+  "private": true,
+  "workspaces": [
+    "server",
+    "agent",
+    "client"
+  ]
+}
