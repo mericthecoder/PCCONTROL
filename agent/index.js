@@ -1,14 +1,17 @@
 const io = require('socket.io-client');
 const { exec } = require('child_process');
 const { SerialPort } = require('serialport');
+const fs = require('fs');
 
-// Setup SerialPort (configure with correct port when hardware is connected)
-// let serial;
-// try {
-//   serial = new SerialPort({ path: 'COM3', baudRate: 9600 });
-// } catch (e) {
-//   console.error('Serial port not available');
-// }
+const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
+
+let serial;
+try {
+  serial = new SerialPort({ path: config.port, baudRate: config.baudRate });
+  console.log(`Serial port ${config.port} initialized`);
+} catch (e) {
+  console.error('Serial port initialization failed:', e.message);
+}
 
 const socket = io('http://localhost:3000'); // Update with actual server URL later
 
@@ -20,12 +23,11 @@ socket.on('connect', () => {
 socket.on('execute', (action) => {
   console.log('Executing action:', action);
   
-  // Option 1: Hardware HID (if serial is active)
-  // if (serial && serial.isOpen) {
-  //   serial.write(JSON.stringify(action));
-  // }
+  if (serial && serial.isOpen) {
+    serial.write(JSON.stringify(action));
+  }
   
-  // Option 2: Software HID (existing)
+  // Software HID fallback
   if (action.type === 'key') {
     const psCommand = `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('${action.value}')"`;
     exec(psCommand);

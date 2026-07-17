@@ -150,6 +150,26 @@ PCCONTROL now supports **Hardware HID Integration**.
 
 ---
 
+## 🛠️ Hardware Setup (Optional)
+
+If you are using an external microcontroller (e.g., Arduino) for hardware HID:
+
+1.  **Identify your COM Port:** Run the included port lister script:
+    ```bash
+    cd agent
+    node list-ports.js
+    ```
+2.  **Configure:** Note the correct `Path` (e.g., `COM3`) from the output. Update the `agent/config.json` file with this port:
+    ```json
+    {
+      "port": "COM3",
+      "baudRate": 9600
+    }
+    ```
+3.  **Restart Agent:** Restart the agent script (`node index.js`).
+
+---
+
 ## 🛣️ Future Development Roadmap
 
 - [x] **Advanced Input:** Support for touch gestures on mobile (swipes, pinch-to-zoom).
