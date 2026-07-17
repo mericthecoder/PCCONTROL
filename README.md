@@ -190,7 +190,7 @@ PCCONTROL now supports **WebRTC-based Low-Latency Streaming**.
 - [x] **Hardware HID:** Experiment with Node-HID for true USB emulation.
 - [x] **Authentication:** OAuth2/Auth0 integration for secure user management.
 - [x] **Performance:** WebRTC for low-latency streaming.
-- [ ] **Monitoring:** Add live dashboard for monitoring agent status (CPU/RAM).
+- [x] **Monitoring:** Add live dashboard for monitoring agent status (CPU/RAM).
 - [ ] **Macro Engine:** Allow recording and playback of complex macro sequences.
 
 ---

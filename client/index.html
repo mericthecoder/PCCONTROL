@@ -11,6 +11,12 @@
   <input type="password" id="pin" placeholder="Enter PIN">
   <button onclick="authenticate()">Login</button>
   <div id="controls" style="display:none;">
+    <h3>Dashboard</h3>
+    <div id="stats" style="border: 1px solid #ccc; padding: 10px;">
+        <p>CPU Load: <span id="cpuVal">-</span></p>
+        <p>Memory Usage: <span id="memVal">-</span>%</p>
+    </div>
+
     <h3>Select Agent</h3>
     <select id="agentSelect"></select>
     
@@ -31,6 +37,13 @@
     const socket = io('http://localhost:3000'); // Update with actual server URL
     const touchpad = document.getElementById('touchpad');
     const agentSelect = document.getElementById('agentSelect');
+
+    socket.on('agent_stats', (data) => {
+        if(agentSelect.value === data.agentId) {
+            document.getElementById('cpuVal').textContent = data.stats.cpu;
+            document.getElementById('memVal').textContent = data.stats.memory;
+        }
+    });
 
     function updateAgentList(agents) {
       agentSelect.innerHTML = '';

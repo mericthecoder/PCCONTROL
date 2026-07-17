@@ -4,6 +4,7 @@ const { SerialPort } = require('serialport');
 const fs = require('fs');
 const Peer = require('simple-peer');
 const screenshot = require('screenshot-desktop');
+const os = require('os');
 
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
@@ -22,6 +23,15 @@ let peer;
 socket.on('connect', () => {
   console.log('Connected to server');
   socket.emit('identify', { name: 'PC-' + Math.floor(Math.random() * 1000) });
+  
+  // Stats reporting
+  setInterval(() => {
+    const stats = {
+      cpu: os.loadavg()[0],
+      memory: ((os.totalmem() - os.freemem()) / os.totalmem() * 100).toFixed(2)
+    };
+    socket.emit('stats', stats);
+  }, 3000);
 });
 
 socket.on('signal', (data) => {

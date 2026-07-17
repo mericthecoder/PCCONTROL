@@ -61,6 +61,10 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('stats', (stats) => {
+    io.emit('agent_stats', { agentId: socket.id, stats });
+  });
+
   // WebRTC Signaling
   socket.on('signal', (data) => {
     if (data.targetId && agents.has(data.targetId)) {
