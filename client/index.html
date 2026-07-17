@@ -12,11 +12,23 @@
   <button onclick="authenticate()">Login</button>
   <div id="controls" style="display:none;">
     <button onclick="sendAction({ type: 'key', value: '{ENTER}' })">Press Enter</button>
-    <button onclick="sendAction({ type: 'mouse', x: 500, y: 500 })">Move Mouse to (500,500)</button>
+    <div id="touchpad" style="width: 100vw; height: 50vh; background-color: #ddd; margin-top: 10px;">
+      Touchpad (Move Mouse Here)
+    </div>
   </div>
 
   <script>
     const socket = io('http://localhost:3000'); // Update with actual server URL
+    const touchpad = document.getElementById('touchpad');
+
+    touchpad.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      // Scale coordinates: assuming phone screen is ~1000px wide
+      const x = Math.floor(touch.clientX * 2); 
+      const y = Math.floor(touch.clientY * 2);
+      sendAction({ type: 'mouse', x: x, y: y });
+    });
 
     function authenticate() {
       const pin = document.getElementById('pin').value;

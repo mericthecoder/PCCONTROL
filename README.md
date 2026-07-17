@@ -4,6 +4,16 @@ PCCONTROL is a powerful, lightweight, and secure solution designed to turn your 
 
 ---
 
+## ✨ Features - Advanced Inputs
+
+PCCONTROL now supports **Touchpad Emulation** directly from your mobile device.
+
+- **Touchpad Area:** A designated area in the web interface captures touch movements on your phone.
+- **Real-time Cursor Control:** As you slide your finger across the phone's screen, the corresponding mouse position is calculated and sent to your PC agent, which updates the Windows cursor position in real-time.
+- **Low-Latency Feedback:** Using WebSocket events for high-frequency coordinate updates.
+
+---
+
 ## 🚀 Concept & Philosophy
 
 The philosophy behind PCCONTROL is **minimalism meets functionality**. Rather than streaming your entire desktop (which consumes massive bandwidth, high latency, and high CPU), PCCONTROL sends lightweight, event-driven commands (key presses, mouse movements) to your PC. 
