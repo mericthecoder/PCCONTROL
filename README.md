@@ -111,8 +111,8 @@ To host the Signaling Server publicly:
 
 ## 🛣️ Future Development Roadmap
 
-- [ ] **Advanced Input:** Support for touch gestures on mobile (swipes, pinch-to-zoom).
-- [ ] **Configurable PIN:** Move PIN to a secure environment variable.
+- [x] **Advanced Input:** Support for touch gestures on mobile (swipes, pinch-to-zoom).
+- [x] **Configurable PIN:** Move PIN to a secure environment variable.
 - [ ] **Full HID Mapping:** Implement comprehensive support for keyboard shortcuts and advanced mouse buttons.
 - [ ] **Multi-Agent Support:** Allow connecting multiple PCs and switching between them in the UI.
 - [ ] **Native App Wrappers:** Create Electron/Tauri versions of the client for a better experience.

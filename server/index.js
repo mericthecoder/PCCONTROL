@@ -12,7 +12,7 @@ const io = new Server(server, {
 
 const PORT = process.env.PORT || 3000;
 
-const VALID_PIN = '1234';
+const VALID_PIN = process.env.PIN || '1234';
 const authenticatedClients = new Set();
 
 io.on('connection', (socket) => {
