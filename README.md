@@ -170,6 +170,16 @@ If you are using an external microcontroller (e.g., Arduino) for hardware HID:
 
 ---
 
+## ✨ Features - WebRTC Streaming
+
+PCCONTROL now supports **WebRTC-based Low-Latency Streaming**.
+
+- **Infrastructure:** Integrated `simple-peer` for P2P WebRTC signaling.
+- **Screen Capture:** Added `screenshot-desktop` to capture PC screen data.
+- **Real-time P2P:** P2P connection allows sending high-frequency screen data directly from PC to Controller with minimal latency.
+
+---
+
 ## 🛣️ Future Development Roadmap
 
 - [x] **Advanced Input:** Support for touch gestures on mobile (swipes, pinch-to-zoom).
@@ -179,8 +189,7 @@ If you are using an external microcontroller (e.g., Arduino) for hardware HID:
 - [x] **Native App Wrappers:** Create Electron/Tauri versions of the client for a better experience.
 - [x] **Hardware HID:** Experiment with Node-HID for true USB emulation.
 - [x] **Authentication:** OAuth2/Auth0 integration for secure user management.
-- [ ] **Performance:** WebRTC for low-latency streaming.
-- [ ] **Security:** Two-Factor Authentication (2FA) for sensitive actions.
+- [x] **Performance:** WebRTC for low-latency streaming.
 - [ ] **Monitoring:** Add live dashboard for monitoring agent status (CPU/RAM).
 - [ ] **Voice Control:** Integrate speech-to-text for voice-activated commands.
 - [ ] **Macro Engine:** Allow recording and playback of complex macro sequences.

@@ -61,6 +61,16 @@ io.on('connection', (socket) => {
     }
   });
 
+  // WebRTC Signaling
+  socket.on('signal', (data) => {
+    if (data.targetId && agents.has(data.targetId)) {
+      io.to(data.targetId).emit('signal', { senderId: socket.id, signal: data.signal });
+    } else {
+      // If target is client
+      io.to(data.targetId).emit('signal', { senderId: socket.id, signal: data.signal });
+    }
+  });
+
   socket.on('disconnect', () => {
     console.log('User disconnected');
   });

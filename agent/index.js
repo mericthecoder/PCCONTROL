@@ -2,6 +2,8 @@ const io = require('socket.io-client');
 const { exec } = require('child_process');
 const { SerialPort } = require('serialport');
 const fs = require('fs');
+const Peer = require('simple-peer');
+const screenshot = require('screenshot-desktop');
 
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
@@ -15,9 +17,15 @@ try {
 
 const socket = io('http://localhost:3000'); // Update with actual server URL later
 
+let peer;
+
 socket.on('connect', () => {
   console.log('Connected to server');
   socket.emit('identify', { name: 'PC-' + Math.floor(Math.random() * 1000) });
+});
+
+socket.on('signal', (data) => {
+  if (peer) peer.signal(data.signal);
 });
 
 socket.on('execute', (action) => {
@@ -34,5 +42,19 @@ socket.on('execute', (action) => {
   } else if (action.type === 'mouse') {
     const psCommand = `powershell -Command "Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${action.x}, ${action.y})"`;
     exec(psCommand);
+  } else if (action.type === 'start-stream') {
+    // Initiate WebRTC
+    peer = new Peer({ initiator: true, trickle: false });
+    peer.on('signal', (signal) => {
+      socket.emit('signal', { targetId: action.senderId, signal });
+    });
+    
+    // Periodically capture screen and send as data
+    setInterval(async () => {
+        const img = await screenshot();
+        if (peer && peer.connected) {
+            peer.send(img);
+        }
+    }, 100);
   }
 });
